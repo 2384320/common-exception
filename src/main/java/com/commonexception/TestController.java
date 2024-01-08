@@ -1,7 +1,6 @@
 package com.commonexception;
 
 import com.commonexception.exception.ErrorCode;
-import com.commonexception.exception.ErrorConstant;
 import com.commonexception.exception.SVCException;
 import com.commonexception.response.ResultData;
 import lombok.RequiredArgsConstructor;
