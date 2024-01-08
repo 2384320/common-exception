@@ -12,12 +12,12 @@ public class ValidResult {
     private Object invalidValue;
     private String kind;
 
-    public ValidResult(FieldError fieldError){
-        this.field=fieldError.getField();
-        this.msg=fieldError.getDefaultMessage();
-//        this.invalidValue=(fieldError.getRejectedValue() != null) ? fieldError.getRejectedValue() : "";
-        this.invalidValue=fieldError.getRejectedValue();
-        this.kind=fieldError.getCode();
+    public ValidResult(FieldError fieldError) {
+        this.field = fieldError.getField();
+        this.msg = fieldError.getDefaultMessage();
+//        this.invalidValue = (fieldError.getRejectedValue() != null) ? fieldError.getRejectedValue() : "";
+        this.invalidValue = fieldError.getRejectedValue();
+        this.kind = fieldError.getCode();
     }
 
 }
