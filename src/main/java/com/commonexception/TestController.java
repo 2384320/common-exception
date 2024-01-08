@@ -1,5 +1,6 @@
 package com.commonexception;
 
+import com.commonexception.exception.ErrorCode;
 import com.commonexception.exception.ErrorConstant;
 import com.commonexception.exception.SVCException;
 import com.commonexception.response.ResultData;
@@ -19,10 +20,9 @@ public class TestController {
 
     @PostMapping("/test/{etc}")
     public ResponseEntity exceptionTest(@Validated @RequestBody TestDto dto, @PathVariable String etc) {
-
-        if(etc.equals("first")) throw new SVCException(ErrorConstant.TEST_COUPON_ERROR_NONE_PK);
-        else if(etc.equals("second")) throw new SVCException(ErrorConstant.TEST_ETC);
-        else if(etc.equals("third")) throw new SVCException(".");
+        if (etc.equals("first")) throw new SVCException(ErrorCode.TEST_ETC);
+        else if(etc.equals("second")) throw new SVCException(ErrorCode.TEST_ETC);
+        else if(etc.equals("third")) throw new SVCException(ErrorCode.TEST_ETC);
         else if (etc.equals("trace")) testService.stackTraceTest();
         return new ResponseEntity(new ResultData(), HttpStatus.OK);
     }
