@@ -16,11 +16,15 @@ public class ResultData {
     ErrorCode errorCode;
     Object result;
 
-    public ResultData(ErrorCode errorCode, BindingResult bindingResult){
+    public ResultData(ErrorCode errorCode, BindingResult bindingResult) {
         this.errorCode = errorCode;
         this.result = bindingResult
                 .getFieldErrors()
                 .stream()
                 .map(ValidResult::new).collect(Collectors.toList());
+    }
+
+    public ResultData(ErrorCode errorCode) {
+        this.errorCode = errorCode;
     }
 }
