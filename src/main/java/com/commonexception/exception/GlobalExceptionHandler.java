@@ -9,9 +9,19 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
+
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    private ErrorCode[] errorCodes;
+
+    @PostConstruct
+    public void init() {
+        errorCodes = ErrorCode.values();
+    }
 
     @ExceptionHandler
     public ResponseEntity serverExceptionHandler(Exception e) {
@@ -29,7 +39,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity serviceExceptionHandler(SVCException e) {
         ResultData resultData;
 
-        if (ErrorCode.valueOf(e.getMessage()) != null)
+        if (Arrays.stream(errorCodes).anyMatch(errorCode -> errorCode == e.getErrorCode()))
             resultData = new ResultData(e.getErrorCode());
         else {
             log.error("정의되지 않은 에러: {}", e.getMessage(), e);
