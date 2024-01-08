@@ -1,5 +1,6 @@
 package com.commonexception.response;
 
+import com.commonexception.exception.ErrorCode;
 import com.commonexception.exception.ValidResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,15 +13,14 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultData {
-    int code = ResultCodeConstant.SUC_CD;
-    String msg;
+    ErrorCode errorCode;
     Object result;
 
-    public ResultData(BindingResult bindingResult){
-        this.code = ResultCodeConstant.VAL_FAIL_CD;
+    public ResultData(ErrorCode errorCode, BindingResult bindingResult){
+        this.errorCode = errorCode;
         this.result = bindingResult
                 .getFieldErrors()
                 .stream()
-                .map(e -> new ValidResult(e)).collect(Collectors.toList());
+                .map(ValidResult::new).collect(Collectors.toList());
     }
 }
