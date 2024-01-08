@@ -1,2 +1,0 @@
-env:
-    exceptionPath: "classPath:exception.yml"
