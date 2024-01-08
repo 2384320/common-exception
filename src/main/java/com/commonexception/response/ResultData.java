@@ -13,11 +13,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultData {
-    ErrorCode errorCode;
+    int code;
+    String msg;
     Object result;
 
     public ResultData(ErrorCode errorCode, BindingResult bindingResult) {
-        this.errorCode = errorCode;
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMsg();
         this.result = bindingResult
                 .getFieldErrors()
                 .stream()
@@ -25,6 +27,7 @@ public class ResultData {
     }
 
     public ResultData(ErrorCode errorCode) {
-        this.errorCode = errorCode;
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMsg();
     }
 }
